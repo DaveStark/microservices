@@ -11,7 +11,7 @@ public class ConfigurationApp {
 	public static void main(String[] args) {
 		System.out.println("Starting...");
 		SpringApplication.run(ConfigurationApp.class, args);
-		System.out.println("\r\nStarted");
+		System.out.println("\r\nConfiguration app started");
 	}
 
 }

@@ -2,7 +2,6 @@ package com.dave.microservices.auth.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -40,6 +39,11 @@ public class User implements Serializable {
 	@Column(nullable = false)
 	private String password;
 	
+	@ManyToOne
+	@JoinTable(name="roles", joinColumns ={@JoinColumn(name="role_id")},
+			inverseJoinColumns ={@JoinColumn(name="id")})
+	private Role role;
+	
 	@Column(name="date_modified")
 	private Timestamp dateModified;
 	
@@ -48,10 +52,7 @@ public class User implements Serializable {
 	
 	private boolean active;
 
-	@ManyToMany
-	@JoinTable(name="user_role", joinColumns ={@JoinColumn(name="user_id")},
-			inverseJoinColumns ={@JoinColumn(name="role_id")})
-	private ArrayList<Role> roles;
+	
 	public User() {}
 	
 	public User(User user) {
@@ -90,7 +91,7 @@ public class User implements Serializable {
 	/**
 	 * @return the firstName
 	 */
-	public String getFirst_name() {
+	public String getFirstName() {
 		return firstName;
 	}
 
@@ -176,8 +177,15 @@ public class User implements Serializable {
 	/**
 	 * Returns user's roles
 	 */
-	public ArrayList<Role> getRoles(){
-		return roles;
+	public Role getRole(){
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 }

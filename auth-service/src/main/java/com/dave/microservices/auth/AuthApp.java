@@ -13,7 +13,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 public class AuthApp {
 
 	public static void main(String[] args){
+		System.out.println("\r\nStarting Auth app...");
 		SpringApplication.run(AuthApp.class, args);
+		System.out.println("\r\nAuth app started");
 	}
-	
+
+	//"$2a$10$lKOHvu1rVqm/HVmCKJMUPuSI1elMXAiWfMvQ7j2ffpbQHQUtjuMPa" =="@dm1n$tr470r" 	
 }

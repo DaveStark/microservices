@@ -20,7 +20,8 @@ public class UserDetailsApp extends User implements UserDetails{
 		
 		@Override
 		public Collection<? extends GrantedAuthority> getAuthorities() {
-			String roles=StringUtils.collectionToCommaDelimitedString(getRoles());			
+			//String roles=StringUtils.collectionToCommaDelimitedString(getRole());
+			String roles=getRole().getRole();
 			return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
 		}
 

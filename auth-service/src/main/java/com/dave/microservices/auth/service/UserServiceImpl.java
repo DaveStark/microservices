@@ -4,12 +4,16 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import com.dave.microservices.auth.domain.User;
 import com.dave.microservices.auth.repository.UserRepository;
 
+@Component
+@Qualifier("UserServiceImpl")
 public class UserServiceImpl implements UserService{
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
