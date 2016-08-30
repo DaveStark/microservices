@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+	</head>
+	<body ng-app="simpleApp" >
+		
+		<div ui-view="navbar"></div>
+		<div class="container">
+			<div class="well" ui-view="content">
+				<!-- Angular views -->
+			</div>
+
+			<div class="footer">
+				<p>This is your footer</p>
+			</div>
+		</div>
+	
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+		<script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+		<script src="bower_components/angular-resource/angular-resource.js"></script>
+		<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+		<script src="app/app.module.js"></script>
+		<script src="app/app.state.js"></script>
+		<script src="app/home/home.state.js"></script>
+		<script src="app/config/http.config.js"></script>
+	</body>
+</html>
