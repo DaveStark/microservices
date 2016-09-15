@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: web-gateway
+  cloud:
+    config:
+      #uri: http://config:8888
+      uri: http://localhost:8888
+      fail-fast: true
+      password: 12345
+#      password: ${CONFIG_SERVICE_PASSWORD}
+      username: user
+#server:
+#  port: 8080

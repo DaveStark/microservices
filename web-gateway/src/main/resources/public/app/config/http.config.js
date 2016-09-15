@@ -2,18 +2,18 @@
     'use strict';
 
     angular
-        .module('simpleApp')
+        .module('webgateway')
         .config(httpConfig);
 
-    httpConfig.$inject = ['$urlRouterProvider'
+    httpConfig.$inject = ['$urlRouterProvider'];
 		//, '$httpProvider', 'httpRequestInterceptorCacheBusterProvider', '$urlMatcherFactoryProvider'
-		];
 
-    function httpConfig($urlRouterProvider
+
+    function httpConfig($urlRouterProvider) {
 		//, $httpProvider
 		//, httpRequestInterceptorCacheBusterProvider
 		//, $urlMatcherFactoryProvider
-		) {
+
         
         //Cache everything except rest api requests
         //httpRequestInterceptorCacheBusterProvider.setMatchlist([/.*api.*/, /.*protected.*/], true);
@@ -22,7 +22,7 @@
 
         // $httpProvider.interceptors.push('errorHandlerInterceptor');
         // $httpProvider.interceptors.push('authExpiredInterceptor');
-        // $httpProvider.interceptors.push('authInterceptor');
+//         $httpProvider.interceptors.push('authInterceptor');
         // $httpProvider.interceptors.push('notificationInterceptor');
         // jhipster-needle-angularjs-add-interceptor JHipster will add new application http interceptor here
 

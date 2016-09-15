@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('simpleApp')
+        .module('webgateway')
         .config(stateConfig);
 
     stateConfig.$inject = ['$stateProvider'];

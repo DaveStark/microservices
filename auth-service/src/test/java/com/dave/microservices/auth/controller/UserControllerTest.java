@@ -19,10 +19,12 @@ import com.dave.microservices.auth.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.mockito.MockitoAnnotations.initMocks;
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.security.Principal;
 
 import javax.inject.Inject;
 
@@ -68,10 +70,25 @@ public class UserControllerTest {
 	
 	
 	
-//	@Test
-//	public void shouldReturnCurrentUser() throws Exception {
-//		mockMvc.perform(get("/users/current").principal(new UserPrincipal("test")))
-//				.andExpect(jsonPath("$.name").value("test"))
-//				.andExpect(status().isOk());
-//	}
+	@Test
+	public void shouldReturnCurrentUser() throws Exception {
+		mockMvc.perform(get("/users/current").principal(new PrincipalImpl("test")))
+				.andExpect(jsonPath("$.name").value("test"))
+				.andExpect(status().isOk());
+	}
+	
+	protected class PrincipalImpl implements Principal{
+		
+		String name;
+		
+		PrincipalImpl(String name){
+			this.name = name;
+		}
+		
+		@Override
+		public String getName() {
+			return name;
+		}
+		
+	}
 }

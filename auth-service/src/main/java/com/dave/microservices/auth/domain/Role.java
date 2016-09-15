@@ -28,10 +28,10 @@ public class Role implements Serializable{
 	@Column(name="role")
 	private String role;
 	
-	@Column(name="datemodified")
+	@Column(name="date_modified")
 	private Timestamp dateModified;
 	
-	@Column(name="dateCreated", insertable = true, updatable = false)
+	@Column(name="date_created", insertable = true, updatable = false)
 	private Timestamp dateCreated;
 	
 	/**

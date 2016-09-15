@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('simpleApp')
+        .module('webgateway')
         .config(stateConfig);
 
     stateConfig.$inject = ['$stateProvider'];
@@ -17,7 +17,7 @@
             views: {
                 'content@': {
                     templateUrl: 'app/home/home.html',
-                    controller: 'HomeController',
+//                    controller: 'HomeController',
                     controllerAs: 'ctl'
                 }
             }

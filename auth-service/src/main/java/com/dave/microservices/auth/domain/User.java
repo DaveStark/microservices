@@ -2,6 +2,8 @@ package com.dave.microservices.auth.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,37 +26,36 @@ public class User implements Serializable {
 	private static final long serialVersionUID = -3899228455164474288L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
 	@Column(nullable = false, name = "user_name")
 	private String userName;
-	
-	@Column(nullable = false, name="first_name")
+
+	@Column(nullable = false, name = "first_name")
 	private String firstName;
-	
-	@Column(name="last_name")
+
+	@Column(name = "last_name")
 	private String lastName;
-	
+
 	@Column(nullable = false)
 	private String password;
-	
+
 	@ManyToOne
-	@JoinTable(name="roles", joinColumns ={@JoinColumn(name="role_id")},
-			inverseJoinColumns ={@JoinColumn(name="id")})
+	@JoinColumn(name = "role_id")
 	private Role role;
-	
-	@Column(name="date_modified")
+
+	@Column(name = "date_modified")
 	private Timestamp dateModified;
-	
-	@Column(name="date_created", insertable = true, updatable = false)
+
+	@Column(name = "date_created", insertable = true, updatable = false)
 	private Timestamp dateCreated;
-	
+
 	private boolean active;
 
-	
-	public User() {}
-	
+	public User() {
+	}
+
 	public User(User user) {
 		this.id = user.id;
 		this.userName = user.userName;
@@ -63,6 +64,7 @@ public class User implements Serializable {
 		this.password = user.password;
 		this.dateModified = user.dateModified;
 		this.dateCreated = user.dateCreated;
+		this.role = user.role;
 		this.active = user.active;
 	}
 
@@ -82,7 +84,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param userName the user_name to set
+	 * @param userName
+	 *            the user_name to set
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -96,7 +99,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param first_name the firstName to set
+	 * @param first_name
+	 *            the firstName to set
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -110,7 +114,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param lastName the lastName to set
+	 * @param lastName
+	 *            the lastName to set
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -124,7 +129,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param password the password to set
+	 * @param password
+	 *            the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -138,7 +144,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param date_modified the date_modified to set
+	 * @param date_modified
+	 *            the date_modified to set
 	 */
 	@PreUpdate
 	void setDateModified() {
@@ -153,7 +160,8 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param date_created the dateCreated to set
+	 * @param date_created
+	 *            the dateCreated to set
 	 */
 	@PrePersist
 	public void setDateCreated() {
@@ -168,21 +176,23 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param active the active to set
+	 * @param active
+	 *            the active to set
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
+
 	/**
 	 * Returns user's roles
 	 */
-	public Role getRole(){
+	public Role getRole() {
 		return role;
 	}
 
 	/**
-	 * @param role the role to set
+	 * @param role
+	 *            the role to set
 	 */
 	public void setRole(Role role) {
 		this.role = role;

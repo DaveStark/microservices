@@ -2,45 +2,47 @@
     'use strict';
 
     angular
-        .module('simpleApp')
+        .module('webgateway')
         .controller('NavbarController', NavbarController);
+    
+    NavbarController.$inject = ['$state', 'AuthService'];
 
-    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService'];
-
-    function NavbarController ($state, Auth, Principal, ProfileService, LoginService) {
-        var vm = this;
-
-        vm.isNavbarCollapsed = true;
-        vm.isAuthenticated = Principal.isAuthenticated;
-
-        ProfileService.getProfileInfo().then(function(response) {
-            vm.inProduction = response.inProduction;
-            vm.swaggerEnabled = response.swaggerEnabled;
-        });
-
-        vm.login = login;
-        vm.logout = logout;
-        vm.toggleNavbar = toggleNavbar;
-        vm.collapseNavbar = collapseNavbar;
-        vm.$state = $state;
-
-        function login() {
-            collapseNavbar();
-            LoginService.open();
-        }
+    function NavbarController ($state, AuthService) {
+        var ctl = this;
+        ctl.logout = logout;
 
         function logout() {
-            collapseNavbar();
-            Auth.logout();
-            $state.go('home');
-        }
-
-        function toggleNavbar() {
-            vm.isNavbarCollapsed = !vm.isNavbarCollapsed;
-        }
-
-        function collapseNavbar() {
-            vm.isNavbarCollapsed = true;
+//            collapseNavbar();
+            AuthService.logout();
+            $state.go('login');
         }
     }
+//        ctl.isNavbarCollapsed = true;
+//        ctl.isAuthenticated = Principal.isAuthenticated;
+//
+//        ProfileService.getProfileInfo().then(function(response) {
+//            ctl.inProduction = response.inProduction;
+//            ctl.swaggerEnabled = response.swaggerEnabled;
+//        });
+//
+//        ctl.login = login;
+//        ctl.toggleNavbar = toggleNavbar;
+//        ctl.collapseNavbar = collapseNavbar;
+//        ctl.$state = $state;
+//
+//        function login() {
+//            collapseNavbar();
+//            LoginService.open();
+//        }
+//
+//
+//
+//        function toggleNavbar() {
+//            ctl.isNavbarCollapsed = !ctl.isNavbarCollapsed;
+//        }
+//
+//        function collapseNavbar() {
+//            ctl.isNavbarCollapsed = true;
+//        }
+//    }
 })();

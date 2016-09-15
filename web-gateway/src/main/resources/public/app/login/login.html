@@ -1,0 +1,40 @@
+<div 
+  class="container" role="main">
+  <div class="row ">
+    <h2>Login</h2>
+    <hr />
+    <div class="col-md-8">
+      <div class="form-horizontal" role="form">
+        <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input type="text" class="form-control" ng-model="ctl.loginEntity.user" placeholder="User name"/>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input type="password" id="password" class="form-control"  ng-model="ctl.loginEntity.password" placeholder="Password"/>
+        </div>
+        <div class="form-group">
+          <label> <input
+            type="checkbox" id="rememberme" ng-model="ctl.loginEntity.rememberMe" /> Remember me
+          </label>
+        </div>
+        <div class="alert alert-danger" ng-show="ctl.badCredentials">
+          Wrong credentials
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <button class="btn btn-primary btn-block" id="login" ng-click="ctl.login()">Log
+              in</button>
+          </div>
+        </div>
+        <hr />
+        <div class="form-group col-sm-9">
+          <div>
+            Not registered? <a href="register">Sign up here</a>
+          </div>
+          <a href="javascript:void(0)">Forgot your password?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
