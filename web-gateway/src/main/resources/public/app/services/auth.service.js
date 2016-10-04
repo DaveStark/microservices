@@ -12,7 +12,8 @@
     		logout: logout,
     		storeAuthenticationToken: storeAuthenticationToken,
     		loginWithToken: loginWithToken,
-    		isLoggedIn : isLoggedIn
+    		isLoggedIn : isLoggedIn,
+    		getToken : getToken
     	};
     	
     	return service;
@@ -31,7 +32,7 @@
         		data: data,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': 'Basic YnJvd3Nlcjo='
+                    'Authorization': 'Basic YnJvd3Nlcjo=' // 'browser:' <- that means in authorization header 'user:password' in this case only will send the user to use it in '.withClient("browser")'
                     //,'Authorization': 'Basic ' + btoa('clientPassword:secret'),
                 },
                 transformRequest: function(obj) {
@@ -49,10 +50,6 @@
             });
         }
         
-        function logout () {
-            return $http.post('api/logout');            
-        }
-        
         function loginWithToken(accessToken, rememberMe) {
             var deferred = $q.defer();
 
@@ -67,8 +64,17 @@
         }
 
         function isLoggedIn(){
-            return false;//TODO
+            if(getToken())
+                return true;
+            else
+                return false;
+
         }
+
+        function getToken () {
+            return $localStorage.authenticationToken || $sessionStorage.authenticationToken;
+        }
+
         
         function storeAuthenticationToken(accessToken, rememberMe) {
             if(rememberMe){
@@ -79,6 +85,30 @@
         }
 
         function logout () {
+            removeOauthTokenFromStorage();
+        }
+
+        function getCurrentAccount(){//I think, i dont need this method
+            var token = getToken();
+            var account = null;
+            if(token){
+                return $http({
+                    url: 'accounts/current',//TODO: Change this url
+                    method: 'get',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                        //,'Authorization': 'Basic ' + btoa('clientPassword:secret'),
+                    }
+                }).then(function (data) {
+                    account = data;
+                },function(response){
+                    removeOauthTokenFromStorage();
+                });
+            }
+            return account;
+        }
+
+        function removeOauthTokenFromStorage(){
             delete $localStorage.authenticationToken;
             delete $sessionStorage.authenticationToken;
         }

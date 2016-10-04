@@ -20,7 +20,7 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 @EnableAuthorizationServer 
 class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
-	private TokenStore tokenStore = new InMemoryTokenStore();
+	private TokenStore tokenStore = new InMemoryTokenStore(); //The default InMemoryTokenStore but also exists  JdbcTokenStore
 
 	@Autowired
 	@Qualifier("authenticationManagerBean")
@@ -43,7 +43,7 @@ class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 				.authorizedGrantTypes("refresh_token", "password")
 				.scopes("ui")
 		.and()
-				.withClient("account-service")
+				.withClient("account-service")//This is one of the name of the clients, you can change it for another different one
 				.secret(env.getProperty("ACCOUNT_SERVICE_PASSWORD"))
 				.authorizedGrantTypes("client_credentials", "refresh_token")
 				.scopes("server")

@@ -6,10 +6,10 @@
         .factory('stateHandler', stateHandler);
 
     stateHandler.$inject = ['$rootScope', '$state', '$sessionStorage',  '$window',
-        'AuthService', 'VERSION'];
+        'AuthService'];
 
     function stateHandler($rootScope, $state, $sessionStorage,  $window,
-        AuthService, VERSION) {
+        AuthService) {
         return {
             initialize: initialize
         };
@@ -18,14 +18,15 @@
 //            $rootScope.VERSION = VERSION;
 
             var stateChangeStart = $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams, fromState) {
-                if(AuthService.isLoggedIn() && $state.$current.name != 'login'){
+                if(!AuthService.isLoggedIn() && toState.name != 'login'){
                     event.preventDefault();
-                    $state.go('login',null,{reload.true});
+                    $state.go('login');
                 }
             });
         }
     }
 })();
+
 //                $rootScope.toState = toState;
 //                $rootScope.toStateParams = toStateParams;
 //                $rootScope.fromState = fromState;

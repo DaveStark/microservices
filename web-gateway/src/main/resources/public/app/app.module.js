@@ -14,7 +14,7 @@
 
     run.$inject = ['stateHandler'];
 
-    function run() {
+    function run(stateHandler) {
         stateHandler.initialize();
     }
 })();

@@ -54,4 +54,5 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 	}
 }
 
-//Access tokens are now available from our new Authorization Server in /oauth/token url thanks to 'spring-security-oauth2' 
+//Access tokens are now available from our new Authorization Server in /oauth/token url thanks to 'spring-security-oauth2'
+//http://projects.spring.io/spring-security-oauth/docs/oauth2.html
