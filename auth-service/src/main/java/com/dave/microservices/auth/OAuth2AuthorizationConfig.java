@@ -43,8 +43,9 @@ class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 				.authorizedGrantTypes("refresh_token", "password")
 				.scopes("ui")
 		.and()
-				.withClient("account-service")//This is one of the name of the clients, you can change it for another different one
-				.secret(env.getProperty("ACCOUNT_SERVICE_PASSWORD"))
+				.withClient("metrics-service")//This is one of the name of the clients, you can change it for another different one
+				.secret(env.getProperty("0987"))
+				//.secret(env.getProperty("METRICS_SERVICE_PASSWORD"))
 				.authorizedGrantTypes("client_credentials", "refresh_token")
 				.scopes("server")
 		.and()
@@ -73,5 +74,6 @@ class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 		oauthServer
 				.tokenKeyAccess("permitAll()")
 				.checkTokenAccess("isAuthenticated()");
+				//.checkTokenAccess("isAuthenticated() \\ hasRole('ROLE_NAME')"); //Use this to assign access to a specific role
 	}
 }

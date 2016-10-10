@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - property:
+      name: sdate
+      value: sysdate
+      dbms: oracle
+  - property:
+      name: sdate
+      value: now()
+      dbms: mysql
+  - property:
+      name: sdate
+      value: now()
+      dbms: postgresql
+  - property:
+      name: sdate
+      value: now()
+      dbms: mssql
+  - include:
+      file: db/changelog/changelog_1_initialize_database.yml
+  - include:
+      file: db/changelog/changelog_2_load_initial_data.yml
