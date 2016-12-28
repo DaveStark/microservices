@@ -4,28 +4,32 @@ databaseChangeLog:
       author: DaveStark
       changes: 
         - createTable:
-            tableName: users
+            tableName: account_types
             columns:
               - column: 
                   name: id
                   type: int
-                  autoIncrement: true
                   constraints: 
                     primaryKey: true
                     nullable: false
               - column:
-                  name: user_name
+                  name: name
                   type: varchar(50)
                   constraints:
                     nullable: false
+        - createTable:
+            tableName: accounts
+            columns:
               - column:
-                  name: first_name
-                  type: varchar(50)
+                  name: id
+                  type: int
+                  autoIncrement: true
                   constraints:
+                    primaryKey: true
                     nullable: false
               - column:
-                  name: last_name
-                  type: varchar(50)
+                  name: name
+                  type: varchar(80)
                   constraints:
                     nullable: false
               - column:
@@ -36,50 +40,81 @@ databaseChangeLog:
                   name: date_created
                   type: datetime
                   defaultValueComputed: ${sdate}
-        - createTable: 
-            tableName: users
+              - column:
+                  name: account_type_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_accout_account_types_id
+                    references: account_types(id)
+              - column:
+                  name: owner_account
+                  type: varchar(70)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: items
             columns:
-              - column: 
+              - column:
                   name: id
                   type: int
                   autoIncrement: true
-                  constraints: 
+                  constraints:
                     primaryKey: true
                     nullable: false
-              - column: 
-                  name: user_name
+              - column:
+                  name: description
                   type: varchar(50)
-                  constraints: 
+                  constraints:
                     nullable: false
-              - column: 
-                  name: first_name
-                  type: varchar(50)
-                  constraints: 
-                    nullable: false
-              - column: 
-                  name: last_name
-                  type: varchar(50)
-                  constraints: 
-                    nullable: false
-              - column: 
-                  name: password
-                  type: varchar(256)
-                  constraints: 
+        - createTable:
+            tableName: currencies
+            columns:
+              - column:
+                  name: code
+                  type: char(3)
+                  constraints:
+                    primaryKey: true
                     nullable: false
               - column:
-                  name: role_id
+                  name: name
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: account_detail
+            columns:
+              - column:
+                  name: id
                   type: int
-                  constraints: 
-                    foreignKeyName: fk_users_role_id_role
-                    references: roles(id)
-              - column: 
-                  name: date_modified
-                  type: datetime
-                  defaultValueComputed: ${sdate}
-              - column: 
-                  name: date_created
-                  type: datetime
-                  defaultValueComputed: ${sdate}
-              - column: 
-                  name: active
-                  type: boolean
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: account_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_accout_detail_account
+                    references: accounts(id)
+              - column:
+                  name: item_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_accout_detail_item_id
+                    references: items(id)
+              - column:
+                  name: amount
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: value
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: currency_code
+                  type: char(3)
+                  constraints:
+                    foreignKeyName: fk_accout_detail_currency_code
+                    references: currencies(id)

@@ -2,15 +2,14 @@ package com.dave.microservices.auth.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.UUID;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -27,7 +26,7 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private String uuid;
 
 	@Column(nullable = false, name = "user_name")
 	private String userName;
@@ -57,7 +56,7 @@ public class User implements Serializable {
 	}
 
 	public User(User user) {
-		this.id = user.id;
+		this.uuid = user.uuid;
 		this.userName = user.userName;
 		this.firstName = user.firstName;
 		this.lastName = user.lastName;
@@ -68,12 +67,20 @@ public class User implements Serializable {
 		this.active = user.active;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	@PrePersist
+	public void initialize()
+	{
+		this.uuid = UUID.randomUUID().toString();
+		this.dateModified = this.dateCreated = new Timestamp(System.currentTimeMillis());
 	}
 
-	public Integer getId() {
-		return this.id;
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public String getUuid() {
+		return this.uuid;
 	}
 
 	/**
@@ -99,7 +106,7 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param first_name
+	 * @param firstName
 	 *            the firstName to set
 	 */
 	public void setFirstName(String firstName) {
@@ -115,7 +122,7 @@ public class User implements Serializable {
 
 	/**
 	 * @param lastName
-	 *            the lastName to set
+	 * the lastName to set
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -144,8 +151,7 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param date_modified
-	 *            the date_modified to set
+	 * the date_modified to set
 	 */
 	@PreUpdate
 	void setDateModified() {
@@ -160,12 +166,12 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @param date_created
-	 *            the dateCreated to set
+	 * @param dateCreated
+	 * the dateCreated to set
 	 */
-	@PrePersist
-	public void setDateCreated() {
-		this.dateModified = this.dateCreated = new Timestamp(System.currentTimeMillis());
+
+	public void setDateCreated(Timestamp dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 
 	/**

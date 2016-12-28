@@ -2,27 +2,27 @@ databaseChangeLog:
   - changeSet: 
       id: 1
       author: DaveStark
-      changes: 
+      changes:
         - createTable:
             tableName: roles
             columns:
-              - column: 
+              - column:
                   name: id
                   type: int
                   autoIncrement: true
-                  constraints: 
+                  constraints:
                     primaryKey: true
                     nullable: false
-              - column: 
+              - column:
                   name: role
                   type: varchar(30)
-                  constraints: 
+                  constraints:
                     nullable: false
-              - column: 
+              - column:
                   name: date_modified
                   type: datetime
                   defaultValueComputed: ${sdate}
-              - column: 
+              - column:
                   name: date_created
                   type: datetime
                   defaultValueComputed: ${sdate}
@@ -30,9 +30,8 @@ databaseChangeLog:
             tableName: users
             columns:
               - column: 
-                  name: id
-                  type: int
-                  autoIncrement: true
+                  name: uuid
+                  type: varchar(70)
                   constraints: 
                     primaryKey: true
                     nullable: false

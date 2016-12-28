@@ -1,0 +1,9 @@
+security:
+  oauth2:
+    client:
+      clientId: metrics-service
+      #clientSecret: ${ACCOUNT_SERVICE_PASSWORD}
+      clientSecret: 0987
+      accessTokenUri: http://auth-service:5000/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server

@@ -21,9 +21,8 @@ databaseChangeLog:
             file: db/changelog/defaultUser.csv
             columns:
             - column: 
-                name: id
-                type: NUMERIC
-                autoIncrement: true
+                name: uuid
+                type: STRING
             - column: 
                 name: user_name
                 type: STRING

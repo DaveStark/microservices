@@ -1,51 +1,53 @@
 package com.dave.microservices.metrics.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "accounts")
-public class Account {
+public class Account implements Serializable {
 	
 	@Id
-	@GeneratedValue
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 	
 	@NotNull
 	private String name;
-	
-	@NotNull
-	private List<Item> items;
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "account_id")
+	private List<AccountDetail> accountDetails;
 	
 	@NotNull
 	private Date modifiedDate;
 	
 	@NotNull
 	private Date createdDate;
-	
-	@NotNull
+
+	@ManyToOne
+	@JoinColumn(name = "account_type_id")
 	private AccountType accountType;
 
+	//This is the account's owner uuid
+	@NotNull
+    @Column(name="owner_account")
+	private String ownerAccount;
 	
 	/**
 	 * @return the id
 	 */
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
@@ -66,15 +68,15 @@ public class Account {
 	/**
 	 * @return the items
 	 */
-	public List<Item> getItems() {
-		return items;
+	public List<AccountDetail> getDetails() {
+		return accountDetails;
 	}
 
 	/**
 	 * @param items the items to set
 	 */
-	public void setItems(List<Item> items) {
-		this.items = items;
+	public void setDetails(List<AccountDetail> items) {
+		this.accountDetails = items;
 	}
 
 	/**
@@ -119,5 +121,13 @@ public class Account {
 	 */
 	public void setAccountType(AccountType accountType) {
 		this.accountType = accountType;
+	}
+
+	public String getOwner() {
+		return ownerAccount;
+	}
+
+	public void setOwner(String ownerAccount) {
+		this.ownerAccount = ownerAccount;
 	}
 }

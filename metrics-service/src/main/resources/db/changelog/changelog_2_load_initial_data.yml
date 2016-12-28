@@ -4,41 +4,22 @@ databaseChangeLog:
       author: DaveStark
       changes:
         - loadData:
-            tableName: roles
-            file: db/changelog/defaultRoles.csv
+            tableName: account_types
+            file: db/changelog/defaultAccountTypes.csv
             columns:
             - column: 
                 name: id
                 type: NUMERIC
             - column: 
-                name: role
+                name: name
                 type: STRING
-#            - column: 
-#                name: date_modified
-#                type: DATE
         - loadData:
-            tableName: users
-            file: db/changelog/defaultUser.csv
+            tableName: currencies
+            file: db/changelog/defaultCurrencies.csv
             columns:
             - column: 
-                name: id
-                type: NUMERIC
-                autoIncrement: true
-            - column: 
-                name: user_name
+                name: code
                 type: STRING
             - column: 
-                name: first_name
+                name: name
                 type: STRING
-            - column: 
-                name: last_name
-                type: STRING
-            - column: 
-                name: password
-                type: STRING
-            - column:
-                name: role_id
-                type: NUMERIC 
-            - column: 
-                name: active
-                type: BOOLEAN

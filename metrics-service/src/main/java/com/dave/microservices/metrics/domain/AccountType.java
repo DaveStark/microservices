@@ -1,9 +1,14 @@
 package com.dave.microservices.metrics.domain;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-public enum AccountType {
+@Entity
+@Table(name="account_types")
+public enum AccountType implements Serializable {
 
     Income(1, "Income"),
     Expense(2, "Expense");

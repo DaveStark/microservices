@@ -1,2 +1,2 @@
-user_name,first_name,last_name,password,role_id,active
-admin,Admin,admin,$2a$10$lKOHvu1rVqm/HVmCKJMUPuSI1elMXAiWfMvQ7j2ffpbQHQUtjuMPa,1,true
+uuid,user_name,first_name,last_name,password,role_id,active
+c2a8e0bd-ae1a-4462-9578-63da3f4012b8,admin,Admin,admin,$2a$10$lKOHvu1rVqm/HVmCKJMUPuSI1elMXAiWfMvQ7j2ffpbQHQUtjuMPa,1,true
